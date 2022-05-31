@@ -32,19 +32,20 @@ dataset_test  = datasets.FashionMNIST(root='data', download=True, train=False, t
 dataloader_train = DataLoader(dataset=dataset_train, batch_size=64, shuffle=True)
 dataloader_test  = DataLoader(dataset=dataset_test,  batch_size=64, shuffle=True)
 
-model = Classifier_Model_2(784)
+model = Classifier_Model_1(784)
 
 optimizer = optim.Adam(model.parameters(), lr=0.003)
 criterion = nn.CrossEntropyLoss()
 
 
-epochs, all_train_losses, all_test_losses = 3, [], []
+epochs, all_train_losses, all_test_losses = 30, [], []
 
 for epoch in range(epochs):
      training_loss = 0
      for features_train, target_train in iter(dataloader_train):
 
-          features_train = features_train.view(features_train.shape[0], -1)
+          # features_train = features_train.view(features_train.shape[0], -1)
+          features_train = features_train.view( -1, 28*28)
 
           optimizer.zero_grad()
           prediction_train = model.forward(features_train)
@@ -62,7 +63,8 @@ for epoch in range(epochs):
      with torch.no_grad():
           for features_test, targets_test in iter(dataloader_test):
 
-               features_test = features_test.view(-1, 28*28)
+               # features_test = features_test.view(-1, 28*28)
+               features_test = features_test.view( -1, 28*28)
 
                prediction_test = model.forward(features_test)
                loss_test = criterion(prediction_test, targets_test)
@@ -73,10 +75,11 @@ for epoch in range(epochs):
      model.train()
 
 
-     print(f'{epoch:3}/{epochs}  |  Training Loss  :  {average_training_loss:.8f}   |   Testing Loss  :  {average_testing_loss:.8f}')
+     print(f'{epoch+1:3}/{epochs}  |  Training Loss  :  {average_training_loss:.8f}   |   Testing Loss  :  {average_testing_loss:.8f}')
 
 
-torch.save(model.state_dict(), 'trained_model')
+
+torch.save({ "model_state": model.state_dict(), "input_size": 28*28}, 'trained_model')
 
 plt.plot(all_train_losses, label='Train Loss')
 plt.plot(all_test_losses,  label='Test Loss')

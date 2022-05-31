@@ -6,12 +6,14 @@ import torch.nn as nn
 
 class Classifier_Model_1(nn.Module):
      def __init__(self, input):
+
           super(Classifier_Model_1, self).__init__()
-          self.input_layer = nn.Linear(input, 32)
-          self.first_hidden = nn.Linear(32, 32)
-          self.second_hidden = nn.Linear(32, 32)
-          self.third_hidden = nn.Linear(32, 32)
-          self.output_layer = nn.Linear(32, 10)
+
+          self.input_layer = nn.Linear(input, 64)
+          self.first_hidden = nn.Linear(64, 64)
+          self.second_hidden = nn.Linear(64, 64)
+          self.third_hidden = nn.Linear(64, 64)
+          self.output_layer = nn.Linear(64, 10)
 
           self.sigmoid = nn.Sigmoid()
           self.softmax = nn.Softmax(dim=1)
@@ -26,10 +28,10 @@ class Classifier_Model_1(nn.Module):
           return x 
 
 
-
 class Classifier_Model_2(nn.Module):
      def __init__(self, input):
           super(Classifier_Model_2, self).__init__()
+
           self.first_later = nn.Linear(input, 64)
           self.second_layer = nn.Linear(64, 64)
           self.third_layer = nn.Linear(64, 32)
@@ -37,10 +39,7 @@ class Classifier_Model_2(nn.Module):
 
           self.relu = nn.ReLU()
           self.sigmoid = nn.Sigmoid()
-
           self.softmax = nn.Softmax(dim=1)
-
-
 
      def forward(self, x):
           x = self.relu( self.first_later(x) )
