@@ -32,27 +32,19 @@ dataset_test  = datasets.FashionMNIST(root='data', download=True, train=False, t
 dataloader_train = DataLoader(dataset=dataset_train, batch_size=64, shuffle=True)
 dataloader_test  = DataLoader(dataset=dataset_test,  batch_size=64, shuffle=True)
 
-model = Classifier_Model_1(784)
+model = Classifier_Model_2(784)
 
 optimizer = optim.Adam(model.parameters(), lr=0.003)
 criterion = nn.CrossEntropyLoss()
 
 
-epochs, all_train_losses, all_test_losses = 10, [], []
+epochs, all_train_losses, all_test_losses = 3, [], []
 
 for epoch in range(epochs):
      training_loss = 0
      for features_train, target_train in iter(dataloader_train):
-          print()
-          print(features_train.shape)
-          print()
 
           features_train = features_train.view(features_train.shape[0], -1)
-          # features_train.resize_(features_train.size()[0], 28*28)
-
-          print()
-          print(features_train.shape)
-          print()
 
           optimizer.zero_grad()
           prediction_train = model.forward(features_train)
