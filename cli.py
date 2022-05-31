@@ -26,7 +26,7 @@ test_data_root = args.test_data_dir
 
 
 transform_test   = transforms.Compose([  transforms.Grayscale(), transforms.Resize((28, 28)),  transforms.ToTensor(), transforms.Normalize(mean=[0.5], std=[0.5])  ])
-dataset_test     = datasets.FashionMNIST(root='data_validate', download=True, train=False, transform=transform_test)
+dataset_test     = datasets.FashionMNIST(root=test_data_root, download=True, train=False, transform=transform_test)
 dataloader_test  = DataLoader(dataset=dataset_test,  batch_size=64, shuffle=True)
 
 data_iter = iter(dataloader_test)
