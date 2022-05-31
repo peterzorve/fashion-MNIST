@@ -11,17 +11,11 @@ import matplotlib.pyplot as plt
 from functions import imshow, view_classify 
 
 
-
-
-
 trained_model = torch.load('trained_model')
-
 model_state = trained_model['model_state']
 
 model = Classifier_Model_1(28*28)
 model.load_state_dict(model_state)
-
-
 
 transform_test   = transforms.Compose([  transforms.Grayscale(), transforms.Resize((28, 28)),  transforms.ToTensor(), transforms.Normalize(mean=[0.5], std=[0.5])  ])
 dataset_test     = datasets.FashionMNIST(root='data_validate', download=True, train=False, transform=transform_test)
@@ -30,11 +24,9 @@ dataloader_test  = DataLoader(dataset=dataset_test,  batch_size=64, shuffle=True
 data_iter = iter(dataloader_test)
 images, labels = data_iter.next()
 
-
 check_image = images[1]
 check_image_flatten = check_image.view(check_image.shape[0], -1)
 prediction = model.forward(check_image_flatten)
-
 
 view_classify(check_image, prediction, version='Fashion')
 plt.show()
