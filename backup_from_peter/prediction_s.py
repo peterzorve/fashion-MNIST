@@ -44,7 +44,7 @@ plt.show()
 
 ###############################################          REAL DATA    ##################################################
 
-# processed_image = datasets.ImageFolder(root="C:/Users/Omistaja/Desktop/image_folder", transform=transform_test)
+# processed_image = datasets.ImageFolder(root="/Users/szokirov/Documents/GitHub/fashion-MNIST/image_folder", transform=transform_test)
 # dataloader_test  = DataLoader(dataset=processed_image,  batch_size=2, shuffle=True)
 
 # data_iter = iter(dataloader_test)
